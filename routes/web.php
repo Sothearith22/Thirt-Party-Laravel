@@ -3,6 +3,7 @@
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SocialAuthController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,24 +16,37 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/', function () {
+    return view('Auth.login');
+});
 
-Route::get('/register',function(){
+// Route::get('/test-mail', function () {
+
+//     Mail::raw('Hello from Laravel + SendGrid', function ($message) {
+//         $message->to('kimsothearith2007@gmail.com')
+//             ->subject('Test Email');
+//     });
+
+//     return 'Email sent!';
+// });
+
+Route::get('/register', function () {
     return view('Auth.register');
 });
-Route::post('/register',[SocialAuthController::class,'register']);
-Route::get('/login',function(){
+Route::post('/register', [SocialAuthController::class, 'register']);
+Route::get('/login', function () {
     return view('Auth.login');
 })->name('login');
-Route::post('/login',[SocialAuthController::class,'login']);
+Route::post('/login', [SocialAuthController::class, 'login']);
 Route::get('auth/{provider}/redirect', [SocialAuthController::class, 'redirect'])
-    ->where('provider','google|facebook')
+    ->where('provider', 'google|facebook')
     ->name('auth.redirect');
 
 Route::get('auth/{provider}/callback', [SocialAuthController::class, 'callback'])
     ->where('provider', 'google|facebook')
     ->name('auth.callback');
-Route::middleware('auth')->group(function(){
-    Route::get('/home',function(){
+Route::middleware('auth')->group(function () {
+    Route::get('/home', function () {
         return view('page.home');
     });
 });
