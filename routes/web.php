@@ -20,15 +20,15 @@ Route::get('/', function () {
     return view('Auth.login');
 });
 
-// Route::get('/test-mail', function () {
+Route::get('/test-mail', function () {
 
-//     Mail::raw('Hello from Laravel + SendGrid', function ($message) {
-//         $message->to('kimsothearith2007@gmail.com')
-//             ->subject('Test Email');
-//     });
+    Mail::raw('Hello from Laravel + SendGrid', function ($message) {
+        $message->to('kimsothearith2007@gmail.com')
+            ->subject('Test Email');
+    });
 
-//     return 'Email sent!';
-// });
+    return 'Email sent!';
+});
 
 Route::get('/register', function () {
     return view('Auth.register');
@@ -49,6 +49,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', function () {
         return view('page.home');
     });
+
+    Route::post('/logout', [SocialAuthController::class, 'logout'])->name('logout');
 });
 
 // Forgot password request (send email)
