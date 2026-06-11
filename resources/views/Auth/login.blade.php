@@ -144,7 +144,7 @@
                 <div class="flex items-center">
                     <input
                         id="remember-me"
-                        name="remember-me"
+                        name="remember"
                         type="checkbox"
                         class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
                     >
@@ -154,6 +154,17 @@
                     Forgot password?
                 </a>
             </div>
+            @if (session('status'))
+                <div class="mt-4 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+                    {{ session('status') }}
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                    {{ $errors->first() }}
+                </div>
+            @endif
                 <button
                     type="submit"
                     class="btn-hover w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl animate-slide-up stagger-5"

@@ -115,6 +115,7 @@
                         class="input-focus w-full px-3 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-transparent focus:outline-none focus:border-indigo-500 focus:bg-white"
                         required
                         name="email"
+                        value="{{ old('email', $email) }}"
                     >
                     <label for="email" class="floating-label absolute left-4 top-4 text-gray-500 pointer-events-none">
                         Email address
@@ -167,6 +168,11 @@
                      Reset
                 </button>
             </form>
+            @if ($errors->any())
+                <div class="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                    {{ $errors->first() }}
+                </div>
+            @endif
         </div>
     </div>
 {{--
@@ -216,4 +222,3 @@
     </script> --}}
 </body>
 </html>
-
